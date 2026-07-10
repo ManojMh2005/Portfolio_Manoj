@@ -143,7 +143,7 @@ const skillGroups = [ { title: "Mobile", icon: Smartphone, items: ["Android", "K
   <div className="hero-ctas">
     <a href="#work" className="btn btn-primary">View my work <ArrowUpRight size={16} /></a>
     <a href="#contact" className="btn btn-dark">Hire me</a>
-    <a href="/resume.pdf" download onClick={handleResumeClick} className="btn btn-ghost">Resume <Download size={15} /></a>
+    <a href="/Manoj_Resume.pdf" download onClick={handleResumeClick} className="btn btn-ghost">Resume <Download size={15} /></a>
   </div>
   <div className="stats-row">
 
