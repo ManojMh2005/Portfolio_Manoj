@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   Github, Linkedin, Mail, Phone, MapPin, ArrowUpRight, Download,
-  Smartphone, Server, Sparkles, Rocket, ShieldCheck, Bell, Navigation,
-  Lock, ShoppingCart, Database, Send, GraduationCap,
+  Smartphone, Server, Sparkles, Rocket, ShieldCheck, Database, GraduationCap,
+  FileSpreadsheet, Terminal, Gauge, TrendingUp, Workflow, BookOpen,
+  Users, Layers, RefreshCw, LayoutDashboard,
 } from "lucide-react";
 import { submitContactMessage, sendContactEmail, sendAutoReply, logResumeDownload } from "./firebase.js";
 
@@ -56,6 +57,38 @@ function NetworkBackground() {
   );
 }
 
+const skillGroups = [
+  { title: "SQL", icon: Database, items: ["MySQL", "Joins", "CTEs", "Window Functions"] },
+  { title: "Power BI", icon: Gauge, items: ["DAX", "Power Query", "Drill-through Dashboards"] },
+  { title: "Advanced Excel", icon: FileSpreadsheet, items: ["Pivot Tables", "XLOOKUP", "INDEX-MATCH", "Power Query"] },
+  { title: "Python", icon: Terminal, items: ["Pandas", "NumPy", "Matplotlib", "EDA"] },
+  { title: "Analysis Methods", icon: TrendingUp, items: ["KPI Reporting", "RFM Segmentation", "Pareto Analysis"] },
+  { title: "Data Engineering Basics", icon: Workflow, items: ["ETL", "REST APIs", "Git / GitHub"] },
+  { title: "AI & Cloud", icon: Sparkles, items: ["Generative AI", "Google AI Studio", "Gemini API", "AWS EC2"] },
+  // { title: "Engineering Background", icon: Smartphone, items: ["Kotlin", "Jetpack Compose", "Java", "Node.js", "Firebase"] },
+  { title: "Currently Learning", icon: BookOpen, items: ["Snowflake", "Statistics", "Machine Learning"] },
+];
+
+const services = [
+  { icon: Gauge, title: "Dashboards & BI Reporting", desc: "Interactive Power BI dashboards with KPI cards, trends and drill-through, built on your sales, finance or operations data." },
+  { icon: Database, title: "SQL & Excel Data Analysis", desc: "Data cleaning and analysis in SQL (joins, CTEs, window functions), plus Pivot Tables, XLOOKUP and Power Query reports in Excel." },
+  { icon: TrendingUp, title: "Business Analysis & KPIs", desc: "Revenue, AOV, growth and repeat-purchase tracking, RFM customer segmentation and Pareto analysis, with clear recommendations." },
+  { icon: Workflow, title: "Data Pipelines & ETL", desc: "Python and SQL pipelines that load raw files or API data into a database, with layered tables, quality checks and scheduled refresh." },
+];
+const projectLinks = {
+  ecommerce: "https://github.com/ManojMh2005/Blinkit_Dashboard.git",
+  upi: "https://github.com/ManojMh2005/UPI-Pipelines.git",
+  
+};
+
+const RepoLink = ({ href }) =>
+  href ? (
+    <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 20 }}>
+      <a href={href} target="_blank" rel="noreferrer" className="btn btn-ghost">
+        <Github size={15} /> View on GitHub <ArrowUpRight size={14} />
+      </a>
+    </div>
+  ) : null;
 export default function App() {
   const [navSolid, setNavSolid] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -97,18 +130,6 @@ export default function App() {
     }
   };
 
-const skillGroups = [ { title: "Mobile", icon: Smartphone, items: ["Android", "Kotlin", "Jetpack Compose", "Firebase", "FCM"] }, 
-//{title: "Programming", icon: Languages, items: ["Java","Python","C","Kotlin"]}, 
-{ title: "Backend", icon: Server, items: ["Java", "Node.js", "Express", "REST APIs", "MySQL", "JWT Auth"] },
- { title: "AI & Cloud", icon: Sparkles, items: ["Generative AI", "Google AI Studio", "Firebase Studio", "AWS EC2"] }, 
- { title: "Tooling", icon: Rocket, items: ["Git / GitHub", "Firestore", "Google Maps API", "JIRA"] }, ];
-  const services = [
-    { icon: Smartphone, title: "Android App Development", desc: "Native Kotlin apps with Jetpack Compose and Firebase — from MVP to Play Store." },
-    { icon: Server, title: "Backend & API Development", desc: "Node.js and Java REST APIs, MySQL schema design, auth, and clean integration contracts." },
-    { icon: Sparkles, title: "AI-Integrated Features", desc: "Ship chatbots, smart assistants, and GenAI workflows inside your existing product." },
-    { icon: Rocket, title: "MVP Development for Startups", desc: "Idea to working prototype — mobile + backend + AI, delivered end-to-end." },
-  ];
-
   return (
     <div>
       <div className="bg-glow" />
@@ -127,28 +148,26 @@ const skillGroups = [ { title: "Mobile", icon: Smartphone, items: ["Android", "K
       </nav>
 
       {/* HERO */}
-<section className="hero">
-  <div className="pill"><span className="dot" />Available for freelance projects &amp; full-time roles</div>
+      <section className="hero">
+        <div className="pill"><span className="dot" />Available for freelance projects &amp; full-time roles</div>
 
-  <div className="hero-heading-row">
-    <h1>I build Android apps and <span className="accent">backends that ship.</span></h1>
-    <div className="hero-photo-wrap">
-      <img src="/profile.jpg" alt="Manoj Manjappa Halammanavar" className="hero-photo" />
-    </div>
-  </div>
+        <div className="hero-heading-row">
+          <h1>I turn raw data into <span className="accent">dashboards &amp; decisions.</span></h1>
+          <div className="hero-photo-wrap">
+            <img src="/profile.jpg" alt="Manoj Manjappa Halammanavar" className="hero-photo" />
+          </div>
+        </div>
 
-  <p className="hero-sub">
-    I'm Manoj — a Computer Science engineer turning ideas into working mobile and web products.
-  </p>
-  <div className="hero-ctas">
-    <a href="#work" className="btn btn-primary">View my work <ArrowUpRight size={16} /></a>
-    <a href="#contact" className="btn btn-dark">Hire me</a>
-    <a href="/Manoj_Resume.pdf" download onClick={handleResumeClick} className="btn btn-ghost">Resume <Download size={15} /></a>
-  </div>
-  <div className="stats-row">
-
-  </div>
-</section>
+        <p className="hero-sub">
+          I'm Manoj — a Data Analyst with an engineering background in Python and SQL.
+        </p>
+        <div className="hero-ctas">
+          <a href="#projects" className="btn btn-primary">View my work <ArrowUpRight size={16} /></a>
+          <a href="#contact" className="btn btn-dark">Hire me</a>
+          <a href="/Manoj_DA1 1.pdf" download onClick={handleResumeClick} className="btn btn-ghost">Resume <Download size={15} /></a>
+        </div>
+        <div className="stats-row"></div>
+      </section>
 
       {/* ABOUT */}
       <section id="about">
@@ -157,11 +176,13 @@ const skillGroups = [ { title: "Mobile", icon: Smartphone, items: ["Android", "K
           <Reveal className="about-text">
             <h2 className="section-title">Engineering Scalable Solutions. Delivering Measurable Impact.</h2>
             <p style={{ marginTop: 20 }}>
-               I'm Software Engineer focused on Java Backend Development, Android, and Generative AI, 
-               with hands-on experience delivering scalable,secure, and user-centric applications. 
-              Committed to transforming complex ideas into reliable digital products that create real business impact.
+              Data Analyst with a Computer Science degree (B.E., CGPA 8.4, 2026). Skilled in SQL, Python (Pandas, NumPy),
+              Power BI and Advanced Excel for data cleaning, exploratory analysis, KPI reporting and dashboards. Built end-to-end analytics
+              projects on real Indian datasets. Strong engineering foundation with growing focus on ETL, data modeling and Snowflake.
             </p>
-            <p>Turning innovative ideas into reliable, production-ready software with precision and quality. Available for freelance collaborations and full-time opportunities.</p>
+            <p><p>
+  I'm building data pipelines in Python and SQL that move raw data into layered tables (RAW, STAGING, MART), add data-quality checks and refresh on a schedule with GitHub Actions, so Power BI dashboards always run on clean data. Available for freelance collaborations and full-time opportunities.
+</p>.</p>
           </Reveal>
           <Reveal delay={100}>
             <div className="education-card">
@@ -172,9 +193,9 @@ const skillGroups = [ { title: "Mobile", icon: Smartphone, items: ["Android", "K
               <h3>B.E - Computer Science</h3>
               <div className="sub">Jawaharlal Nehru New College of Engineering</div>
               <div className="edu-row"><span className="l">2022 – 2026</span><span className="r">CGPA 8.4 / 10</span></div>
-              <div className="edu-row"><span className="l">Base</span><span className="r">Shivamogga, Karnataka</span></div>
-              <div className="edu-row"><span className="l">Focus</span><span className="r">Android · Backend · GenAI</span></div>
-              <div className="edu-row"><span className="l">Status</span><span className="r">Open to full-time Roles &amp; Freelance work </span></div>
+              <div className="edu-row"><span className="l">Base</span><span className="r">Bengaluru, Karnataka</span></div>
+              <div className="edu-row"><span className="l">Focus</span><span className="r">Data Analyst with GenAI</span></div>
+              <div className="edu-row"><span className="l">Status</span><span className="r">Open to full-time Roles &amp; Freelance work</span></div>
             </div>
           </Reveal>
         </div>
@@ -200,29 +221,29 @@ const skillGroups = [ { title: "Mobile", icon: Smartphone, items: ["Android", "K
         </div>
       </section>
 
-      {/* WORK */}
-      <section id="work">
-        <Reveal><div className="eyebrow">Hands_On Projects</div></Reveal>
-        <Reveal><h2 className="section-title">Two builds that show how I ship end-to-end.</h2></Reveal>
-        <Reveal><p className="section-lead">Crafting production-ready mobile and backend applications with modern architecture, scalable APIs, and seamless user experiences.</p></Reveal>
+      {/* PROJECTS */}
+      <section id="projects">
+        <Reveal><div className="eyebrow">Hands-On Projects</div></Reveal>
+        <Reveal><h2 className="section-title">Three builds that show how I work with data end-to-end.</h2></Reveal>
 
         <Reveal>
           <div className="project-featured">
             <div>
-              <div className="project-tag">Android Application </div>
-              <h3>Suraksha-Setu</h3>
-              <p className="lede">A hyper-local safety network for rural India.</p>
-              <p className="lede">Shake-to-trigger SOS Android app that connects users to a 500m Circle of Trust during emergencies.</p>
+              <div className="project-tag">Data Analytics · In progress</div>
+              <h3>E-commerce Sales Performance &amp; Customer Analytics</h3>
+              <p className="lede">
+                Analysing 100K+ orders across customers, sellers, products, payments and reviews.
+              </p>
               <div className="feature-list">
-                <div className="feature-row"><Navigation /><div><div className="t">Live GPS Sharing</div><div className="d">Real-time location beamed to your Safe Circle the moment an emergency triggers.</div></div></div>
-                <div className="feature-row"><Bell /><div><div className="t">Shake-to-SOS</div><div className="d">Physical shake detection fires the alert instantly — no unlocking, no tapping.</div></div></div>
-                <div className="feature-row"><Send /><div><div className="t">FCM + SMS Fallback</div><div className="d">Push notifications reach contacts first; SMS backs it up when data drops.</div></div></div>
-                <div className="feature-row"><ShieldCheck /><div><div className="t">Geofencing &amp; Siren</div><div className="d">500m radius geofence with an audible siren to attract nearby help.</div></div></div>
+                <div className="feature-row"><Database /><div><div className="t">SQL Analysis</div><div className="d">Multi-table joins, CTEs and window functions.</div></div></div>
+                <div className="feature-row"><TrendingUp /><div><div className="t">Core Metrics</div><div className="d">Revenue, AOV, growth and repeat-purchase rate.</div></div></div>
+                <div className="feature-row"><Gauge /><div><div className="t">Power BI Dashboard</div><div className="d">Multi-page, with KPI cards, YoY/MoM trends and drill-through.</div></div></div>
+                <div className="feature-row"><Users /><div><div className="t">Customer Insights</div><div className="d">RFM segmentation, Pareto analysis, delivery-vs-review impact and business recommendations.</div></div></div>
               </div>
-              <div>{["Android Studio", "Kotlin", "Jetpack Compose", "Firebase", "FCM", "Cloud Architect",  "Google Maps API"].map((t) => <span className="chip" key={t}>{t}</span>)}</div>
+              <div>{["MySQL", "Advanced Excel", "Power BI", "DAX", "Statistics"].map((t) => <span className="chip" key={t}>{t}</span>)}</div>
             </div>
             <div className="project-visual">
-              <ShieldCheck size={64} color="var(--accent)" strokeWidth={1.2} />
+              <Gauge size={64} color="var(--accent)" strokeWidth={1.2} />
             </div>
           </div>
         </Reveal>
@@ -230,44 +251,57 @@ const skillGroups = [ { title: "Mobile", icon: Smartphone, items: ["Android", "K
         <Reveal delay={100}>
           <div className="project-featured">
             <div className="project-visual" style={{ order: 2 }}>
-              <Database size={64} color="var(--accent)" strokeWidth={1.2} />
+              <Layers size={64} color="var(--accent)" strokeWidth={1.2} />
             </div>
             <div style={{ order: 1 }}>
-              <div className="project-tag">Full Stack Application </div>
-              <h3>E-Commerce Web System</h3>
-              <p className="lede">A production-style online store, owned end-to-end.</p>
-              <p className="lede">Production-ready e-commerce backend engineered with secure authentication, scalable architecture, and high-performance RESTful APIs.</p>
+              <div className="project-tag">Data Engineering · In progress</div>
+              <h3>UPI Digital Payments Analytics Pipeline</h3>
+              <p className="lede">An ETL pipeline that takes NPCI monthly UPI transaction data from raw files to a Power BI dashboard.</p>
               <div className="feature-list">
-                <div className="feature-row"><Lock /><div><div className="t">JWT Auth</div><div className="d">Signup, login, and refresh flow with hashed passwords and role claims.</div></div></div>
-                <div className="feature-row"><ShieldCheck /><div><div className="t">Role-Based Access</div><div className="d">Middleware keeps customers and admins in separate lanes at the API layer.</div></div></div>
-                <div className="feature-row"><ShoppingCart /><div><div className="t">Cart &amp; Checkout</div><div className="d">Server-side cart, prices recomputed at checkout, orders written in a single transaction.</div></div></div>
+                <div className="feature-row"><Database /><div><div className="t">ETL into Snowflake</div><div className="d">Python pipeline loading NPCI monthly UPI data into RAW, STAGING and MART (star schema) layers.</div></div></div>
+                <div className="feature-row"><ShieldCheck /><div><div className="t">SQL Transformations &amp; Quality Checks</div><div className="d">CTEs, window functions and data-quality checks.</div></div></div>
+                <div className="feature-row"><RefreshCw /><div><div className="t">Scheduled Refresh</div><div className="d">Automated runs with GitHub Actions.</div></div></div>
+                <div className="feature-row"><Gauge /><div><div className="t">Power BI Dashboard</div><div className="d">Volume, value and growth trends.</div></div></div>
               </div>
-              <div>{["Java","Web-Design","Node.js", "Express", "MySQL", "JWT Auth", "REST APIs", "Postman"].map((t) => <span className="chip" key={t}>{t}</span>)}</div>
+              <div>{["Python", "Pandas", "Requests", "Snowflake", "SQL", "GitHub Actions", "Power BI"].map((t) => <span className="chip" key={t}>{t}</span>)}</div>
             </div>
           </div>
         </Reveal>
-        </section>
 
-        {/* INTERNSHIP */}
+        <Reveal delay={200}>
+          <div className="project-featured">
+            <div className="project-visual">
+              <Sparkles size={64} color="var(--accent)" strokeWidth={1.2} />
+            </div>
+            <div>
+              <div className="project-tag">Analytics + GenAI · In progress</div>
+              <h3>AI-Narrated Sales Dashboard</h3>
+              <p className="lede">An interactive sales dashboard that explains its own numbers in plain English.</p>
+              <div className="feature-list">
+                <div className="feature-row"><LayoutDashboard /><div><div className="t">Interactive Dashboard</div><div className="d">KPIs, trends and segment drill-downs.</div></div></div>
+                <div className="feature-row"><Sparkles /><div><div className="t">AI Insights Panel</div><div className="d">Gemini API writes plain-English insights from the filtered data.</div></div></div>
+                <div className="feature-row"><ShieldCheck /><div><div className="t">Number Verification</div><div className="d">Every figure in the AI summary is checked against computed values before display.</div></div></div>
+              </div>
+              <div>{["Python", "SQL", "Streamlit", "Gemini API", "Power BI", "Advanced Excel"].map((t) => <span className="chip" key={t}>{t}</span>)}</div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* INTERNSHIP */}
       <section id="internship">
         <Reveal><div className="eyebrow">Internship Experience</div></Reveal>
-        <Reveal><h2 className="section-title">Engineering Excellence Through Professional Internships.</h2></Reveal>
-        <Reveal><p className="section-lead">Strengthened expertise in backend development, Android applications, and cloud technologies by delivering practical solutions in a professional engineering environment.</p></Reveal>
+        <Reveal><h2 className="section-title">Hands-on experience in data science and GenAI.</h2></Reveal>
+        <Reveal><p className="section-lead">Applying Python and Generative AI tools to data science tasks.</p></Reveal>
 
         <Reveal delay={150}>
           <div className="other-work-grid">
             <div className="other-work-card">
-              <span className="tag">INternship — MindMatrix   (Feb 2026 - June 2026)</span>
-              <h3>Android App Developer Intern using Gen-AI</h3>
-              <p>Delivered production-ready Android solutions by combining real-time cloud services, scalable API architecture, and Generative AI capabilities. Focused on building secure, maintainable, and high-performance applications that deliver exceptional user experiences.</p>
-              <div>{["Kotlin", "Android Studio","Firebase","Jetpack Compose","UI/UX","Google AI Studio"].map((t) => <span className="chip" key={t}>{t}</span>)}</div>
-            </div>
-            <div className="other-work-card">
-              <span className="tag">Internship — The Developers Arena  (Dec 2025 - Jan 2026)</span>
-              <h3>Java  Full-Stack Developer Intern</h3>
-              <p>Designed and implemented scalable backend architectures with Java, SQL, and RESTful APIs, enabling secure and reliable application functionality. Contributed to performance optimization, cross-functional integration, debugging, and collaborative development using Git-based workflows and modern engineering standards.
-</p>
-              <div>{["Java","HTML/CSS","JavaScript","Node.Js","Spring Boot","Rest API","MySQL"].map((t) => <span className="chip" key={t}>{t}</span>)}</div>
+              <span className="tag">Internship — Palle Technologies (AUG 2026 – In Progress)</span>
+              <h3>Data Science Intern (Gen AI)</h3>
+              {/* TODO: replace this line with what you actually worked on and built */}
+              <p>Data science and Generative AI work using Python and Google AI Studio.</p>
+              <div>{["Python", "Generative AI", "Google AI Studio"].map((t) => <span className="chip" key={t}>{t}</span>)}</div>
             </div>
           </div>
         </Reveal>
@@ -301,8 +335,8 @@ const skillGroups = [ { title: "Mobile", icon: Smartphone, items: ["Android", "K
               <a className="contact-link" href="mailto:mhmanojmanu92@gmail.com"><Mail />mhmanojmanu92@gmail.com</a>
               <a className="contact-link" href="tel:+918431858148"><Phone />+91 84318 58148</a>
               <a className="contact-link" href="https://github.com/ManojMh2005" target="_blank" rel="noreferrer"><Github />github.com/ManojMh2005</a>
-              <a className="contact-link" href="https://linkedin.com/in/manoj-m-h-4600aa310" target="_blank" rel="noreferrer"><Linkedin />linkedin.com/in/manoj-m-h</a>
-              <a className="contact-link" href="#"><MapPin />Ranebennur, Karnataka</a>
+              <a className="contact-link" href="https://linkedin.com/in/manoj-m-h-4600aa310" target="_blank" rel="noreferrer"><Linkedin />linkedin.com/in/manoj-m-h-4600aa310</a>
+              <a className="contact-link" href="#"><MapPin />Bengaluru, Karnataka</a>
             </div>
           </Reveal>
           <Reveal delay={100}>
@@ -329,7 +363,7 @@ const skillGroups = [ { title: "Mobile", icon: Smartphone, items: ["Android", "K
       </section>
 
       <footer>
-        <span className="mono">© 2026 Manoj M H · The Developer,from idea to deployment.</span>
+        <span className="mono">© 2026 Manoj M H · The Engineer, from idea to Business Insights.</span>
         <div className="footer-socials">
           <a href="https://github.com/ManojMh2005" target="_blank" rel="noreferrer"><Github size={18} /></a>
           <a href="https://linkedin.com/in/manoj-m-h-4600aa310" target="_blank" rel="noreferrer"><Linkedin size={18} /></a>
