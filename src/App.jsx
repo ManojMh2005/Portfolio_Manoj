@@ -63,10 +63,10 @@ const skillGroups = [
   { title: "Advanced Excel", icon: FileSpreadsheet, items: ["Pivot Tables", "XLOOKUP", "INDEX-MATCH", "Power Query"] },
   { title: "Python", icon: Terminal, items: ["Pandas", "NumPy", "Matplotlib", "EDA"] },
   { title: "Analysis Methods", icon: TrendingUp, items: ["KPI Reporting", "RFM Segmentation", "Pareto Analysis"] },
-  { title: "Data Engineering Basics", icon: Workflow, items: ["ETL", "REST APIs", "Git / GitHub"] },
+  { title: "Data Engineering Basics", icon: Workflow, items: ["ETL", "REST APIs", "Git / GitHub","CI/CD Automation"] },
   { title: "AI & Cloud", icon: Sparkles, items: ["Generative AI", "Google AI Studio", "Gemini API", "AWS EC2"] },
   // { title: "Engineering Background", icon: Smartphone, items: ["Kotlin", "Jetpack Compose", "Java", "Node.js", "Firebase"] },
-  { title: "Currently Learning", icon: BookOpen, items: ["Snowflake", "Statistics", "Machine Learning"] },
+  { title: "Currently Learning", icon: BookOpen, items: ["Snowflake", "Statistics","PySpark", "Machine Learning"] },
 ];
 
 const services = [
